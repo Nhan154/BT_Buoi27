@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import ShoeCard from "./ShoeCard";
+import Modal from "./Modal";
+
 
 const ShoeShop = () => {
   const data = [
@@ -145,7 +147,7 @@ const ShoeShop = () => {
     },
   ];
 
-  const [selectedShoe, setSelectedShoe] = useState();
+  const [selectedShoe, setSelectedShoe] = useState(null);
 
   const handleViewDetail = (shoe) => {
     console.log("Sản phẩm được chọn: ", shoe);
@@ -163,41 +165,16 @@ const ShoeShop = () => {
   };
 
   return (
-    <div>
-      <h1 className="text-danger">Shoe Shop</h1>
+  <div>
+    <h1>Shoe Shop</h1>
 
-      <div className="row">{renderShoeCard()}</div>
+    <div className="row">{renderShoeCard()}</div>
 
-      {selectedShoe && (
-        <div className="mt-5">
-          <h2 className="text-primary mb-3">Product Detail</h2>
-          <div className="card shadow">
-            <div className="row g-0">
-              <div className="col-md-4">
-                <img
-                  src={selectedShoe.image}
-                  className="img-fluid rounded-start"
-                  alt={selectedShoe.name}
-                />
-              </div>
-              <div className="col-md-8">
-                <div className="card-body">
-                  <h3 className="card-title">{selectedShoe.name}</h3>
-                  <p className="card-text">{selectedShoe.description}</p>
-                  <p className="card-text">
-                    <strong>Price:</strong> {selectedShoe.price} $
-                  </p>
-                  <p className="card-text">
-                    <strong>Quantity:</strong> {selectedShoe.quantity}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
+    {/* Nhớ truyền thêm setContent cho nó đóng cái detail sản phẩm */}
+    <Modal content={selectedShoe} setContent={setSelectedShoe} />
+  </div>
+);
+
 };
 
 export default ShoeShop;
